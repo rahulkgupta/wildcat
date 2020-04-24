@@ -29,8 +29,6 @@ export default Form
 
 
 export const getServerSideProps: GetServerSideProps = async context => {
-    // Fetch data from external API
-    // console.log(context.req)
     const { origin } = absoluteUrl(context.req)
     const res = await fetch(`${origin}/api/forms/${context.params?.fid}`)
     const data = await res.json()
