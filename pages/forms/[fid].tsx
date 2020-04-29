@@ -1,4 +1,6 @@
 import { GetServerSideProps } from 'next'
+import fetch from 'node-fetch'
+import absoluteUrl from 'next-absolute-url'
 
 import { useRouter } from 'next/router'
 
@@ -26,14 +28,12 @@ export default Form
 
 
 
-export const getServerSideProps: GetServerSideProps = async () => {
-    // Fetch data from external API
-    
-    // Pass data to the page via props
+export const getServerSideProps: GetServerSideProps = async context => {
+    const { origin } = absoluteUrl(context.req)
+    const res = await fetch(`${origin}/api/forms/${context.params?.fid}`)
+    const data = await res.json()
     return { props: {
-        data: {
-            key: 'value',
-        },
+        data,
     } }
   }
   

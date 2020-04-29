@@ -8,7 +8,9 @@
     "start": "next start"
   },
   "dependencies": {
+    "@types/node-fetch": "^2.5.7",
     "next": "^9.3.3",
+    "next-absolute-url": "^1.2.2",
     "react": "^16.13.0",
     "react-dom": "^16.13.0"
   },
