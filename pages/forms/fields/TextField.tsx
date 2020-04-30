@@ -6,11 +6,12 @@ interface Props {
 
 
 const TextFieldView = (props: Props) => {
+
     let field = props.field
     return (
         <div>
-            {field.getLabel()}
-            {field.getError()}
+            <label>{field.getLabel()}</label>
+            <input type="text" value={field.getValue()} onChange={(event) =>{field.setValue(event.target.value);}}></input>
         </div>
     )
 }

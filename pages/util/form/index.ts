@@ -8,13 +8,21 @@ export class Field {
     id: string
     label: string
     error: string
+    value: string
+    onUpdate: Function
 
-    constructor(id: string, data: any) {
+    constructor(id: string, data: any, onUpdate: Function) {
         this.id = id;
         this.label = data.label;
         this.error = data.error;
+        this.value = data.value;
+        this.onUpdate = onUpdate;
     }
 
+    getId() {
+        return this.id;
+    }
+    
     getLabel() {
         return this.label;
     }
@@ -22,21 +30,53 @@ export class Field {
     getError() {
         return this.error;
     }
+
+    getValue() {
+        return this.value;
+    }
+
+    setValue(value: string) {
+        this.value = value;
+        return this.value;
+    }
+
+    update() {
+        return null;
+    }
 }
 
 export class TextField extends Field {
+    value: string
+    onUpdate: Function
 
-    constructor(id: string, data: any) {
-        super(id, data);
+    constructor(id: string, data: any, onUpdate:Function ) {
+        super(id, data, onUpdate);
+        this.value = data.value ? data.value : '';
+        this.onUpdate = onUpdate;
+    }
+
+    getValue() {
+        return this.value;
+    }
+
+    setValue(value: string) {
+        console.log(value);
+        this.value = value;
+        this.onUpdate();
+        return this.value;
+    }
+
+    update() {
+        return null;
     }
 
 }
 
 class FieldFactory {
 
-    public createField(id: string, fieldData: any): Field {
+    public createField(id: string, fieldData: any, onUpdate: Function): Field {
         switch(fieldData.type) {
-            case 'text': return new TextField(id, fieldData);
+            case 'text': return new TextField(id, fieldData, onUpdate);
             default: throw Error('no field type found');
         }
     }
@@ -46,16 +86,24 @@ export default class Form {
     id: string
     factory: FieldFactory
     fields: Array<Field>
+    onUpdate: Function
 
-    constructor(data: any) {
+    constructor(data: any, hooks: any) {
         this.id = data.id;
         this.factory = new FieldFactory();
         this.fields = []
+        this.onUpdate = hooks.onUpdate;
         for (const id in data.fields) {
-            this.fields.push(this.factory.createField(id, data.fields[id]))
+            this.fields.push(this.factory.createField(id, data.fields[id], this.update.bind(this)))
         }
+        console.log(this.fields)
     }
 
+    update() {
+        console.log('hello world')
+        this.fields.map((field) => field.update())
+        this.onUpdate()
+    }
     getFields() {
         return this.fields;
     }
