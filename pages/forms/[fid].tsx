@@ -3,37 +3,36 @@ import fetch from 'node-fetch'
 import absoluteUrl from 'next-absolute-url'
 
 import { useRouter } from 'next/router'
+import Form from '../util/form'; //figure out appropriate import
 
-interface Data {
-    key: string,
-}
+import FieldView from './fields';
 
-interface Props {
-    data: Data,
-}
-
-const Form = (props: Props) => {
+const FormView = (props: Form) => {
+    const form = new Form(props);
     const router = useRouter()
     const { fid } = router.query
-    
+    const fields = form.getFields();
+    console.log(fields)
+    const fieldViews = fields.map((field) =>
+        <FieldView {...{field: field}} />
+    );
+
     return (
         <div>
             <p>Form: {fid}</p>
-            <p>data: {props.data.key}</p>
-        </div>
+            <div>{fieldViews}</div>
+        </div>  
     );
 }
 
-export default Form
+export default FormView
 
 
 
 export const getServerSideProps: GetServerSideProps = async context => {
     const { origin } = absoluteUrl(context.req)
     const res = await fetch(`${origin}/api/forms/${context.params?.fid}`)
-    const data = await res.json()
-    return { props: {
-        data,
-    } }
+    const json = await res.json()
+    return { props: json};
   }
   
