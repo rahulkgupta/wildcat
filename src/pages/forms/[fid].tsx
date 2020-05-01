@@ -3,9 +3,9 @@ import fetch from 'node-fetch'
 import absoluteUrl from 'next-absolute-url'
 
 import { useRouter } from 'next/router'
-import Form from '../util/form'; //figure out appropriate import
+import Form from '../../util/form'; //figure out appropriate import
 
-import FieldView from './fields';
+import FieldView from '../../components/fields';
 import React from "react";
 
 interface State {
