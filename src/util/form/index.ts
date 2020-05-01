@@ -60,7 +60,6 @@ export class TextField extends Field {
     }
 
     setValue(value: string) {
-        console.log(value);
         this.value = value;
         this.onUpdate();
         return this.value;
@@ -96,11 +95,9 @@ export default class Form {
         for (const id in data.fields) {
             this.fields.push(this.factory.createField(id, data.fields[id], this.update.bind(this)))
         }
-        console.log(this.fields)
     }
 
     update() {
-        console.log('hello world')
         this.fields.map((field) => field.update())
         this.onUpdate()
     }
