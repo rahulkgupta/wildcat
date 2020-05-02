@@ -2,8 +2,7 @@ import { GetServerSideProps } from 'next'
 import fetch from 'node-fetch'
 import absoluteUrl from 'next-absolute-url'
 
-import { useRouter } from 'next/router'
-import Form from '../../util/form'; //figure out appropriate import
+import Form from '../../util/form'
 
 import FieldView from '../../components/fields';
 import React from "react";
@@ -25,7 +24,7 @@ class FormView extends React.Component<Form, State>  {
         const fields = this.state.form.getFields();
         
         const fieldViews = fields.map((field) =>
-        <FieldView {...{field: field}} />
+        <FieldView key={field.getId()} {...{field: field}} />
         );
         
         return (

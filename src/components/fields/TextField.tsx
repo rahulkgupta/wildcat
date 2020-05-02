@@ -1,4 +1,4 @@
-import { TextField } from '../../util/form';
+import TextField from '../../util/form/fields/text';
 
 interface Props {
     field: TextField

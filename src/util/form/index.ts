@@ -1,75 +1,6 @@
-// Form should be a class with a functionality like getField, etc.
-// on change, react element should run field validation and field conditionals 
-// form should keep all the state, so when a field is updated, the react element calls field.update. 
+import Field from './fields'
+import TextField from './fields/text'
 
-
-
-export class Field {
-    id: string
-    label: string
-    error: string
-    value: string
-    onUpdate: Function
-
-    constructor(id: string, data: any, onUpdate: Function) {
-        this.id = id;
-        this.label = data.label;
-        this.error = data.error;
-        this.value = data.value;
-        this.onUpdate = onUpdate;
-    }
-
-    getId() {
-        return this.id;
-    }
-    
-    getLabel() {
-        return this.label;
-    }
-
-    getError() {
-        return this.error;
-    }
-
-    getValue() {
-        return this.value;
-    }
-
-    setValue(value: string) {
-        this.value = value;
-        return this.value;
-    }
-
-    update() {
-        return null;
-    }
-}
-
-export class TextField extends Field {
-    value: string
-    onUpdate: Function
-
-    constructor(id: string, data: any, onUpdate:Function ) {
-        super(id, data, onUpdate);
-        this.value = data.value ? data.value : '';
-        this.onUpdate = onUpdate;
-    }
-
-    getValue() {
-        return this.value;
-    }
-
-    setValue(value: string) {
-        this.value = value;
-        this.onUpdate();
-        return this.value;
-    }
-
-    update() {
-        return null;
-    }
-
-}
 
 class FieldFactory {
 
@@ -82,6 +13,7 @@ class FieldFactory {
 }
 
 export default class Form {
+    
     id: string
     factory: FieldFactory
     fields: Array<Field>
