@@ -5,6 +5,11 @@ interface Props {
 }
 
 
+/**
+ * Renders the react view for a {@link TextField}
+ * uses the various functions of {@link TextField} to handle display and updates.
+ * @param props contains the {@link TextField}
+ */
 const TextFieldView = (props: Props) => {
 
     let field = props.field

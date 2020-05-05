@@ -11,7 +11,16 @@ interface State {
   form: Form;
 }
 
+/**
+ * Main View to use
+ * Gets data from {@link getServerSideProps}
+ */
 class FormView extends React.Component<Form, State>  {
+
+    /**
+     * Creates a {@link Form} from the props data
+     * @param props Form data.
+     */
     constructor(props: Form) {
         super(props)
         const form = new Form(this.props, {
@@ -20,6 +29,9 @@ class FormView extends React.Component<Form, State>  {
         this.state = {form: form};
     }
 
+    /**
+     * iterates through all the fields in the form and renders them using {@link FieldView}
+     */
     render() {
         const fields = this.state.form.getFields();
         
@@ -39,7 +51,10 @@ class FormView extends React.Component<Form, State>  {
 export default FormView
 
 
-
+/**
+ * fetches form data based on the form id
+ * @param context contains the form id which is grabbed from the url (ie `tilden.io/forms/{id}`)
+ */
 export const getServerSideProps: GetServerSideProps = async context => {
     const { origin } = absoluteUrl(context.req)
     const res = await fetch(`${origin}/api/forms/${context.params?.fid}`)
