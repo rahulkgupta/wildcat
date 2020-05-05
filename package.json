@@ -1,11 +1,12 @@
 {
-  "name": "nextjs",
+  "name": "tilden",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "doc": "typedoc src"
   },
   "dependencies": {
     "@types/node-fetch": "^2.5.7",
@@ -17,6 +18,7 @@
   "devDependencies": {
     "@types/node": "^13.13.2",
     "@types/react": "^16.9.34",
+    "typedoc": "^0.17.6",
     "typescript": "^3.8.3"
   }
 }

@@ -6,6 +6,10 @@ import TextField from '../../util/form/fields/text';
 interface Props {
     field: Field
 }
+
+/**
+ * This comment _supports_ [Markdown](https://marked.js.org/)
+ */
 const FieldView = (props: Props) => {
     if (props.field) {
         return (<TextFieldView {...{
