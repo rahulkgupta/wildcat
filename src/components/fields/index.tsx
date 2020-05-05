@@ -8,10 +8,11 @@ interface Props {
 }
 
 /**
- * This comment _supports_ [Markdown](https://marked.js.org/)
+ * Determines which type of View to render based on which subclass of {@links Field} is being used.
+ * @param props Contains field data
  */
 const FieldView = (props: Props) => {
-    if (props.field) {
+    if (props.field instanceof TextField) {
         return (<TextFieldView {...{
             field: props.field as TextField
         }} />)
