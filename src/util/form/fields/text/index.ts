@@ -35,4 +35,11 @@ export default class TextField extends Field {
     this.onUpdate();
     return this;
   }
+
+  toJSON() {
+    return {
+      id: this.id,
+      value: this.value,
+    };
+  }
 }
