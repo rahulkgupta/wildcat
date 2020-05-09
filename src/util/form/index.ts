@@ -1,4 +1,4 @@
-import Field from "./fields";
+import Field from "./fields"
 import TextField from "./fields/text";
 
 /**
