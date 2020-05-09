@@ -3,9 +3,9 @@ import fetch from 'node-fetch';
 import absoluteUrl from 'next-absolute-url';
 
 import React from 'react';
-import Form from '../../util/form';
+import Form from '@src/util/form';
 
-import FieldView from '../../components/fields';
+import FieldView from '@src/components/fields';
 
 interface State {
   form: Form;
