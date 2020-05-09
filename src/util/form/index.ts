@@ -1,5 +1,5 @@
-import Field from "./fields";
-import TextField from "./fields/text";
+import Field from './fields';
+import TextField from './fields/text';
 
 /**
  * Factory class that creates fields based on their type.
@@ -13,10 +13,10 @@ class FieldFactory {
    */
   public createField(id: string, fieldData: any, onUpdate: Function): Field {
     switch (fieldData.type) {
-      case "text":
+      case 'text':
         return new TextField(id, fieldData, onUpdate);
       default:
-        throw Error("no field type found");
+        throw Error('no field type found');
     }
   }
 }
@@ -48,9 +48,7 @@ export default class Form {
     this.fields = [];
     this.onUpdate = hooks.onUpdate;
     for (const id in data.fields) {
-      this.fields.push(
-        this.factory.createField(id, data.fields[id], this.update.bind(this))
-      );
+      this.fields.push(this.factory.createField(id, data.fields[id], this.update.bind(this)));
     }
   }
 
