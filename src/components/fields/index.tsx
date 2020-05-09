@@ -4,7 +4,7 @@ import TextFieldView from './TextField';
 import TextField from '../../util/form/fields/text';
 
 interface Props {
-    field: Field
+  field: Field;
 }
 
 /**
@@ -12,12 +12,16 @@ interface Props {
  * @param props Contains field data
  */
 const FieldView = (props: Props) => {
-    if (props.field instanceof TextField) {
-        return (<TextFieldView {...{
-            field: props.field as TextField
-        }} />)
-    }
-    return (<div>Oops something went wrong</div>) // replace with error page
-}
+  if (props.field instanceof TextField) {
+    return (
+      <TextFieldView
+        {...{
+          field: props.field as TextField,
+        }}
+      />
+    );
+  }
+  return <div>Oops something went wrong</div>; // replace with error page
+};
 
 export default FieldView;
