@@ -1,7 +1,7 @@
-import Field from '../../util/form/fields';
+import Field from '@src/util/form/fields';
 
 import TextFieldView from './TextField';
-import TextField from '../../util/form/fields/text';
+import TextField from '@src/util/form/fields/text';
 
 interface Props {
   field: Field;
