@@ -9,7 +9,7 @@ jobs:
       - checkout
       - node/with-cache:
           steps:
-            - install: npm install
+            - run: npm install
             - lint: npm run lint
 workflows:
     build-and-test:
