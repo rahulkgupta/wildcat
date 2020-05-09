@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "doc": "typedoc src",
-    "lint": "eslint './src/**/*.{js,ts,tsx}' --quiet --fix"
+    "lint": "eslint './src/**/*.{js,ts,tsx}'"
   },
   "dependencies": {
     "@types/node-fetch": "^2.5.7",

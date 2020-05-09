@@ -5,19 +5,19 @@ import { NextApiRequest, NextApiResponse } from 'next';
  * currently returns hardcoded data.
  */
 export default (req: NextApiRequest, res: NextApiResponse) => {
-    const {
-        query: { fid },
-    } = req;
+  const {
+    query: { fid },
+  } = req;
 
-    res.status(200).json({
-        id: '1234',
-        fields: {
-            ssaf: {
-                label: 'label',
-                value: 'value',
-                error: 'error',
-                type: 'text',
-            },
-        },
-    });
+  res.status(200).json({
+    id: '1234',
+    fields: {
+      ssaf: {
+        label: 'label',
+        value: 'value',
+        error: 'error',
+        type: 'text',
+      },
+    },
+  });
 };
