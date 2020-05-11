@@ -1,9 +1,8 @@
 import SubmitField from '../../util/form/fields/submit';
 
 interface Props {
-    field: SubmitField
+  field: SubmitField;
 }
-
 
 /**
  * Renders the react view for a {@link TextField}
@@ -11,13 +10,18 @@ interface Props {
  * @param props contains the {@link TextField}
  */
 const SubmitFieldView = (props: Props) => {
-
-    let field = props.field
-    return (
-        <div>
-            <input type="submit" value={field.getValue()} onClick={(event) =>{field.submit();}}></input>
-        </div>
-    )
-}
+  const field = props.field;
+  return (
+    <div>
+      <input
+        type="submit"
+        value={field.getValue()}
+        onClick={(event) => {
+          field.submit();
+        }}
+      ></input>
+    </div>
+  );
+};
 
 export default SubmitFieldView;
