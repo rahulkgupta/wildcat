@@ -16,7 +16,7 @@ class FieldFactory {
       case 'text':
         return new TextField(id, fieldData, onUpdate);
       default:
-        throw Error('no field type found');
+        throw Error(`no field type found ${fieldData.type}`);
     }
   }
 }
