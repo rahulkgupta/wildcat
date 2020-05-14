@@ -43,11 +43,19 @@ const data: Data = {
   },
 };
 
-export function getFormByID(id: string): Form {
-  return data[id];
+export function getFormByID(id: string): Form | null {
+  const response = data[id];
+  return response ? response : null;
 }
 
-export function getNextForm(prevFormId: string): Form {
-  const form = data[prevFormId];
-  return data[form.next?.id as string];
+export function getNextForm(prevFormId: string): Form | null {
+  const form = getFormByID(prevFormId);
+  if (!form) {
+    return null;
+  }
+  const next = form.next;
+  if (!next) {
+    return null;
+  }
+  return getFormByID(next['id']);
 }

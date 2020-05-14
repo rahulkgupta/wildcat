@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`db getFormByID finds a form 1`] = `
+Object {
+  "fields": Object {
+    "ssaf": Object {
+      "error": "error",
+      "label": "label",
+      "type": "text",
+      "value": "value",
+    },
+  },
+  "next": Object {
+    "id": "2345",
+    "type": 0,
+  },
+}
+`;
+
+exports[`db getNextForm gets the next form 1`] = `
+Object {
+  "fields": Object {
+    "afsafd": Object {
+      "label": "thank you",
+      "type": "plain-text",
+    },
+  },
+}
+`;
+
+exports[`db getNextForm returns null if form does not exist 1`] = `null`;
+
+exports[`db getNextForm returns null if form has no next 1`] = `null`;
