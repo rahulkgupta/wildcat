@@ -8,54 +8,39 @@ import Form from '@src/util/form';
 import FieldView from '@src/components/fields';
 
 interface State {
-  form?: Form;
-  ok: boolean;
-}
-
-interface Props {
-  form?: Form;
-  ok: boolean;
+  form: Form;
 }
 
 /**
  * Main View to use
  * Gets data from {@link getServerSideProps}
  */
-class FormView extends React.Component<Props, State> {
+class FormView extends React.Component<Form, State> {
   /**
    * Creates a {@link Form} from the props data
    * @param props Form data.
    */
-  constructor(props: Props) {
+  constructor(props: Form) {
     super(props);
-    const ok = props.ok;
-    if (ok) {
-      const form = new Form(this.props.form, {
-        onUpdate: this.forceUpdate.bind(this),
-      });
-      this.state = { form, ok };
-    } else {
-      this.state = { ok };
-    }
+    const form = new Form(this.props, {
+      onUpdate: this.forceUpdate.bind(this),
+    });
+    this.state = { form };
   }
 
   /**
    * iterates through all the fields in the form and renders them using {@link FieldView}
    */
   render() {
-    if (!this.state.ok) {
-      return <div>something went wrong!</div>;
-    } else {
-      const fields = this.state.form?.getFields();
+    const fields = this.state.form.getFields();
 
-      const fieldViews = fields?.map((field) => <FieldView key={field.getId()} {...{ field }} />);
+    const fieldViews = fields.map((field) => <FieldView key={field.getId()} {...{ field }} />);
 
-      return (
-        <div>
-          <div>{fieldViews}</div>
-        </div>
-      );
-    }
+    return (
+      <div>
+        <div>{fieldViews}</div>
+      </div>
+    );
   }
 }
 
@@ -68,18 +53,6 @@ export default FormView;
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { origin } = absoluteUrl(context.req);
   const res = await fetch(`${origin}/api/forms/${context.params?.fid}`);
-  if (!res.ok) {
-    return {
-      props: {
-        ok: false,
-      },
-    };
-  }
   const json = await res.json();
-  return {
-    props: {
-      form: json,
-      ok: true,
-    },
-  };
+  return { props: json };
 };
