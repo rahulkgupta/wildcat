@@ -6,6 +6,7 @@ interface Field {
 }
 
 interface Form {
+  id: string;
   fields: {
     [fieldID: string]: Field;
   };
@@ -20,6 +21,7 @@ interface Data {
 }
 const data: Data = {
   '1234': {
+    id: '1234',
     fields: {
       ssaf: {
         label: 'label',
@@ -40,9 +42,11 @@ const data: Data = {
   },
   '2345': {
     fields: {
-      afsafd: {
-        label: 'thank you',
-        type: 'plain-text',
+      ssaf: {
+        label: 'Thank You',
+        value: 'value',
+        error: 'error',
+        type: 'text',
       },
     },
   },

@@ -40,12 +40,26 @@ class FormView extends React.Component<Props, State> {
   }
 
   async submit() {
-    await fetch(`/api/forms/${this.state.form.getId()}`, {
+    const res = await fetch(`/api/forms/${this.state.form?.getId()}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(this.state.form.toJSON()),
+      body: JSON.stringify(this.state.form?.toJSON()),
+    });
+    if (!res.ok) {
+      return {
+        props: {
+          ok: false,
+        },
+      };
+    }
+    const json = await res.json();
+
+    this.setState({
+      form: new Form(json, {
+        onUpdate: this.forceUpdate.bind(this),
+      }),
     });
   }
   /**
@@ -57,7 +71,7 @@ class FormView extends React.Component<Props, State> {
     } else {
       const fields = this.state.form?.getFields();
 
-      const fieldViews = fields.map((field) => (
+      const fieldViews = fields?.map((field) => (
         <FieldView key={field.getId()} {...{ field, submit: this.submit.bind(this) }} />
       ));
 
