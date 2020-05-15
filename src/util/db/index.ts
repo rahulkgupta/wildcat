@@ -27,6 +27,11 @@ const data: Data = {
         error: 'error',
         type: 'text',
       },
+      aasas: {
+        label: 'label',
+        value: 'value',
+        type: 'submit',
+      },
     },
     next: {
       type: 0,

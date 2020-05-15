@@ -5,7 +5,6 @@ import Field from '..';
  */
 export default class SubmitField extends Field {
   value: string;
-  onSubmit: Function;
 
   /**
    *
@@ -14,10 +13,9 @@ export default class SubmitField extends Field {
    * @param onUpdate
    * @param onSubmit
    */
-  constructor(id: string, data: any, onUpdate: Function, onSubmit: Function) {
+  constructor(id: string, data: any, onUpdate: Function) {
     super(id, data, onUpdate);
     this.value = data.value ? data.value : '';
-    this.onSubmit = onSubmit;
   }
 
   toJSON() {
@@ -32,9 +30,5 @@ export default class SubmitField extends Field {
    */
   getValue() {
     return this.value;
-  }
-
-  submit() {
-    this.onSubmit();
   }
 }

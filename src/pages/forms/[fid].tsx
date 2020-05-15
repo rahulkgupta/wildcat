@@ -39,6 +39,15 @@ class FormView extends React.Component<Props, State> {
     }
   }
 
+  async submit() {
+    await fetch(`/api/forms/${this.state.form.getId()}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(this.state.form.toJSON()),
+    });
+  }
   /**
    * iterates through all the fields in the form and renders them using {@link FieldView}
    */
@@ -48,7 +57,9 @@ class FormView extends React.Component<Props, State> {
     } else {
       const fields = this.state.form?.getFields();
 
-      const fieldViews = fields?.map((field) => <FieldView key={field.getId()} {...{ field }} />);
+      const fieldViews = fields.map((field) => (
+        <FieldView key={field.getId()} {...{ field, submit: this.submit.bind(this) }} />
+      ));
 
       return (
         <div>

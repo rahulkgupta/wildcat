@@ -2,6 +2,7 @@ import SubmitField from '@src/util/form/fields/submit';
 
 interface Props {
   field: SubmitField;
+  submit: Function;
 }
 
 /**
@@ -17,7 +18,7 @@ const SubmitFieldView = (props: Props) => {
         type="submit"
         value={field.getValue()}
         onClick={(event) => {
-          field.submit();
+          props.submit();
         }}
       ></input>
     </div>

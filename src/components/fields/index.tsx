@@ -7,6 +7,7 @@ import SubmitFieldView from './SubmitField';
 
 interface Props {
   field: Field;
+  submit: Function;
 }
 
 /**
@@ -28,6 +29,7 @@ const FieldView = (props: Props) => {
       <SubmitFieldView
         {...{
           field: props.field as SubmitField,
+          submit: props.submit,
         }}
       />
     );

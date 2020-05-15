@@ -1,5 +1,6 @@
 import Field from './fields';
 import TextField from './fields/text';
+import SubmitField from './fields/submit';
 
 /**
  * Factory class that creates fields based on their type.
@@ -12,9 +13,12 @@ class FieldFactory {
    * @param onUpdate the function to call after a field updates.
    */
   public createField(id: string, fieldData: any, onUpdate: Function): Field {
+    console.log(fieldData);
     switch (fieldData.type) {
       case 'text':
         return new TextField(id, fieldData, onUpdate);
+      case 'submit':
+        return new SubmitField(id, fieldData, onUpdate);
       default:
         throw Error(`no field type found ${fieldData.type}`);
     }
