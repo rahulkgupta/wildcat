@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Props | tilden</title>
+	<title>Form | tilden</title>
 	<meta name="description" content="Documentation for tilden">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,13 +56,13 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="../modules/_src_components_fields_index_.html">&quot;src/components/fields/index&quot;</a>
+					<a href="../modules/_src_util_db_index_.html">&quot;src/util/db/index&quot;</a>
 				</li>
 				<li>
-					<a href="_src_components_fields_index_.props.html">Props</a>
+					<a href="_src_util_db_index_.form.html">Form</a>
 				</li>
 			</ul>
-			<h1>Interface Props</h1>
+			<h1>Interface Form</h1>
 		</div>
 	</div>
 </header>
@@ -73,7 +73,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">Props</span>
+						<span class="target">Form</span>
 					</li>
 				</ul>
 			</section>
@@ -84,7 +84,8 @@
 						<section class="tsd-index-section tsd-is-not-exported">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="_src_components_fields_index_.props.html#field" class="tsd-kind-icon">field</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="_src_util_db_index_.form.html#fields" class="tsd-kind-icon">fields</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="_src_util_db_index_.form.html#next" class="tsd-kind-icon">next</a></li>
 							</ul>
 						</section>
 					</div>
@@ -93,12 +94,30 @@
 			<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-					<a name="field" class="tsd-anchor"></a>
-					<h3>field</h3>
-					<div class="tsd-signature tsd-kind-icon">field<span class="tsd-signature-symbol">:</span> <a href="../classes/_src_util_form_fields_index_.field.html" class="tsd-signature-type">Field</a></div>
+					<a name="fields" class="tsd-anchor"></a>
+					<h3>fields</h3>
+					<div class="tsd-signature tsd-kind-icon">fields<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{}</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/tilden-io/wildcat/blob/ebe9923/src/components/fields/index.tsx#L7">src/components/fields/index.tsx:7</a></li>
+							<li>Defined in <a href="https://github.com/tilden-io/wildcat/blob/ebe9923/src/util/db/index.ts#L9">src/util/db/index.ts:9</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-index-signature">
+								<h5><span class="tsd-signature-symbol">[</span>fieldID: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><a href="_src_util_db_index_.field.html" class="tsd-signature-type">Field</a></h5>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
+					<a name="next" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> next</h3>
+					<div class="tsd-signature tsd-kind-icon">next<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">{ </span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> }</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/tilden-io/wildcat/blob/ebe9923/src/util/db/index.ts#L12">src/util/db/index.ts:12</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -116,7 +135,7 @@
 					<li class=" tsd-kind-module">
 						<a href="../modules/_src_components_fields_textfield_.html">&quot;src/components/fields/<wbr>Text<wbr>Field&quot;</a>
 					</li>
-					<li class="current tsd-kind-module">
+					<li class=" tsd-kind-module">
 						<a href="../modules/_src_components_fields_index_.html">&quot;src/components/fields/index&quot;</a>
 					</li>
 					<li class=" tsd-kind-module">
@@ -128,7 +147,7 @@
 					<li class=" tsd-kind-module">
 						<a href="../modules/_src_pages_index_.html">&quot;src/pages/index&quot;</a>
 					</li>
-					<li class=" tsd-kind-module">
+					<li class="current tsd-kind-module">
 						<a href="../modules/_src_util_db_index_.html">&quot;src/util/db/index&quot;</a>
 					</li>
 					<li class=" tsd-kind-module">
@@ -156,20 +175,35 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-interface tsd-parent-kind-module tsd-is-not-exported">
+						<a href="_src_util_db_index_.data.html" class="tsd-kind-icon">Data</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-module tsd-is-not-exported">
+						<a href="_src_util_db_index_.field.html" class="tsd-kind-icon">Field</a>
+					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-parent-kind-module tsd-is-not-exported">
-						<a href="_src_components_fields_index_.props.html" class="tsd-kind-icon">Props</a>
+						<a href="_src_util_db_index_.form.html" class="tsd-kind-icon">Form</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-								<a href="_src_components_fields_index_.props.html#field" class="tsd-kind-icon">field</a>
+								<a href="_src_util_db_index_.form.html#fields" class="tsd-kind-icon">fields</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
+								<a href="_src_util_db_index_.form.html#next" class="tsd-kind-icon">next</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
 					<li class=" tsd-kind-function tsd-parent-kind-module">
-						<a href="../modules/_src_components_fields_index_.html#fieldview" class="tsd-kind-icon">Field<wbr>View</a>
+						<a href="../modules/_src_util_db_index_.html#getformbyid" class="tsd-kind-icon">get<wbr>Form<wbr>ByID</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="../modules/_src_util_db_index_.html#getnextform" class="tsd-kind-icon">get<wbr>Next<wbr>Form</a>
+					</li>
+					<li class=" tsd-kind-object-literal tsd-parent-kind-module tsd-is-not-exported">
+						<a href="../modules/_src_util_db_index_.html#data-1" class="tsd-kind-icon">data</a>
 					</li>
 				</ul>
 			</nav>
