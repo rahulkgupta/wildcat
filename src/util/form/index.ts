@@ -57,11 +57,15 @@ export default class Form {
    * This function is passed into {@link FieldFactory.createField}
    * which is then passed to the Field constructor.
    */
-  update() {
+  update(): void {
     this.fields.map((field) => field.update());
     this.onUpdate();
   }
-  getFields() {
+  getFields(): Field[] {
     return this.fields;
+  }
+
+  getId(): string {
+    return this.id;
   }
 }
