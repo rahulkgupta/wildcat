@@ -1,6 +1,5 @@
 import Field from './fields';
 import TextField from './fields/text';
-import SubmitField from './fields/submit';
 
 /**
  * Factory class that creates fields based on their type.
@@ -12,14 +11,12 @@ class FieldFactory {
    * @param fieldData The data for the field. We use fieldData.type` to determine what field to instantiate.
    * @param onUpdate the function to call after a field updates.
    */
-  public createField(id: string, fieldData: any, onUpdate: Function, onSubmit: Function): Field {
+  public createField(id: string, fieldData: any, onUpdate: Function): Field {
     switch (fieldData.type) {
       case 'text':
         return new TextField(id, fieldData, onUpdate);
-      case 'submit':
-        return new SubmitField(id, fieldData, onUpdate, onSubmit);
       default:
-        throw Error('no field type found');
+        throw Error(`no field type found ${fieldData.type}`);
     }
   }
 }
@@ -51,7 +48,7 @@ export default class Form {
     this.fields = [];
     this.onUpdate = hooks.onUpdate;
     for (const id in data.fields) {
-      this.fields.push(this.factory.createField(id, data.fields[id], this.update.bind(this), this.submit.bind(this)));
+      this.fields.push(this.factory.createField(id, data.fields[id], this.update.bind(this)));
     }
   }
 
@@ -60,12 +57,17 @@ export default class Form {
    * This function is passed into {@link FieldFactory.createField}
    * which is then passed to the Field constructor.
    */
-  update() {
+  update(): void {
     this.fields.map((field) => field.update());
     this.onUpdate();
   }
-  getFields() {
+
+  getFields(): Field[] {
     return this.fields;
+  }
+
+  getId(): string {
+    return this.id;
   }
 
   toJSON(): any {
@@ -75,17 +77,6 @@ export default class Form {
     return JSON.stringify({
       id: this.id,
       fields,
-    });
-  }
-
-  // need to update to prevent multiple submissions
-  async submit() {
-    await fetch(`/api/forms/${this.id}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(this.toJSON()),
     });
   }
 }
