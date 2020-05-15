@@ -8,4 +8,14 @@ module.exports = {
   transform: {
     '^.+\\.(ts|tsx)$': 'babel-jest',
   },
+  collectCoverageFrom: ['./src/**/*.{ts,tsx}'],
+  collectCoverage: true,
+  coverageThreshold: {
+    global: {
+      branches: 75,
+      functions: 45,
+      lines: 51,
+      statements: -49,
+    },
+  },
 };
