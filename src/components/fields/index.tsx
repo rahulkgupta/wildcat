@@ -1,13 +1,10 @@
 import Field from '@src/util/form/fields';
 
 import TextFieldView from './TextField';
-import TextField from '../../util/form/fields/text';
-import SubmitField from '../../util/form/fields/submit';
-import SubmitFieldView from './SubmitField';
+import TextField from '@src/util/form/fields/text';
 
 interface Props {
   field: Field;
-  submit: Function;
 }
 
 /**
@@ -24,17 +21,6 @@ const FieldView = (props: Props) => {
       />
     );
   }
-  if (props.field instanceof SubmitField) {
-    return (
-      <SubmitFieldView
-        {...{
-          field: props.field as SubmitField,
-          submit: props.submit,
-        }}
-      />
-    );
-  }
-
   return <div>Oops something went wrong</div>; // replace with error page
 };
 
