@@ -13,15 +13,14 @@ interface Props {
 const SubmitFieldView = (props: Props) => {
   const field = props.field;
   return (
-    <div>
-      <input
-        type="submit"
-        value={field.getValue()}
-        onClick={(event) => {
-          props.submit();
-        }}
-      ></input>
-    </div>
+    <input
+      type="submit"
+      value={field.getValue()}
+      onClick={(event) => {
+        props.submit();
+      }}
+      data-testid={field.getId()}
+    ></input>
   );
 };
 

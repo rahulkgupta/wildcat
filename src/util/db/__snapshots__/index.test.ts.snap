@@ -26,9 +26,11 @@ Object {
 exports[`db getNextForm gets the next form 1`] = `
 Object {
   "fields": Object {
-    "afsafd": Object {
-      "label": "thank you",
-      "type": "plain-text",
+    "ssaf": Object {
+      "error": "error",
+      "label": "Thank You",
+      "type": "text",
+      "value": "value",
     },
   },
 }

@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TextFieldView onClick 1`] = `"new value"`;
+
+exports[`TextFieldView render 1`] = `
+<div>
+  <label>
+    label
+  </label>
+  <input
+    data-testid="1234"
+    onChange={[Function]}
+    type="text"
+    value="value"
+  />
+</div>
+`;
