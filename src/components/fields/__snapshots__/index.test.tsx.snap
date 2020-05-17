@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FieldView renders SubmitFieldView 1`] = `
+<input
+  data-testid="1234"
+  onClick={[Function]}
+  type="submit"
+  value="value"
+/>
+`;
+
+exports[`FieldView renders TextFieldView 1`] = `
+<div>
+  <label>
+    label
+  </label>
+  <input
+    data-testid="1234"
+    onChange={[Function]}
+    type="text"
+    value="value"
+  />
+</div>
+`;
+
+exports[`FieldView renders error 1`] = `
+<div>
+  Oops something went wrong
+</div>
+`;

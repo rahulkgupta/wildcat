@@ -29,7 +29,6 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
 
     const form = getFormByID(fid as string);
     if (!form) {
-      console.log('yup');
       return res.status(404).json({});
     }
     return res.status(200).json(form);

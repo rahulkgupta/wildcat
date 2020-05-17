@@ -20,6 +20,7 @@ const TextFieldView = (props: Props) => {
         onChange={(event) => {
           field.setValue(event.target.value);
         }}
+        data-testid={field.getId()}
       />
     </div>
   );
