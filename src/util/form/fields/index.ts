@@ -5,11 +5,8 @@
  */
 export default abstract class Field {
   id: string; // id of the field
-
   label: string; // label of the field, such as "Enter your Name"
-
   error: string; // error, used for when someone inputs something incorrectly
-
   onUpdate: Function;
 
   /**
@@ -52,4 +49,6 @@ export default abstract class Field {
   update() {
     return null;
   }
+
+  abstract toJSON(): any;
 }

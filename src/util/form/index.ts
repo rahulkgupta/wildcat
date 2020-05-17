@@ -1,5 +1,6 @@
 import Field from './fields';
 import TextField from './fields/text';
+import SubmitField from './fields/submit';
 
 /**
  * Factory class that creates fields based on their type.
@@ -15,6 +16,8 @@ class FieldFactory {
     switch (fieldData.type) {
       case 'text':
         return new TextField(id, fieldData, onUpdate);
+      case 'submit':
+        return new SubmitField(id, fieldData, onUpdate);
       default:
         throw Error(`no field type found ${fieldData.type}`);
     }
@@ -61,11 +64,22 @@ export default class Form {
     this.fields.map((field) => field.update());
     this.onUpdate();
   }
+
   getFields(): Field[] {
     return this.fields;
   }
 
   getId(): string {
     return this.id;
+  }
+
+  toJSON(): any {
+    const fields: string[] = [];
+    this.fields.map((field) => fields.push(field.toJSON()));
+
+    return JSON.stringify({
+      id: this.id,
+      fields,
+    });
   }
 }

@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TextField getError 1`] = `"error"`;
+
+exports[`TextField getId 1`] = `"12234"`;
+
+exports[`TextField getLabel 1`] = `"label"`;
+
+exports[`TextField getValue 1`] = `"value"`;
+
+exports[`TextField setValue 1`] = `"34555"`;
+
+exports[`TextField toJSON 1`] = `
+Object {
+  "id": "12234",
+  "value": "value",
+}
+`;
