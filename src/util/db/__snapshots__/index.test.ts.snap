@@ -3,6 +3,11 @@
 exports[`db getFormByID finds a form 1`] = `
 Object {
   "fields": Object {
+    "aasas": Object {
+      "label": "label",
+      "type": "submit",
+      "value": "value",
+    },
     "ssaf": Object {
       "error": "error",
       "label": "label",
@@ -10,6 +15,7 @@ Object {
       "value": "value",
     },
   },
+  "id": "1234",
   "next": Object {
     "id": "2345",
     "type": 0,
