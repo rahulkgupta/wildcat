@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Form functions getFields 1`] = `
+Array [
+  Object {
+    "id": "ssaf",
+    "value": "value",
+  },
+  Object {
+    "id": "submit",
+    "value": "value",
+  },
+]
+`;
+
+exports[`Form functions toJSON 1`] = `"{\\"id\\":\\"1234\\",\\"fields\\":[{\\"id\\":\\"ssaf\\",\\"value\\":\\"value\\"},{\\"id\\":\\"submit\\",\\"value\\":\\"value\\"}]}"`;

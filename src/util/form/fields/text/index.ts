@@ -15,7 +15,7 @@ export default class TextField extends Field {
    */
   constructor(id: string, data: any, onUpdate: Function) {
     super(id, data, onUpdate);
-    this.value = data.value ? data.value : '';
+    this.value = data.value;
   }
 
   /**

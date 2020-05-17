@@ -13,7 +13,6 @@ class FieldFactory {
    * @param onUpdate the function to call after a field updates.
    */
   public createField(id: string, fieldData: any, onUpdate: Function): Field {
-    console.log(fieldData);
     switch (fieldData.type) {
       case 'text':
         return new TextField(id, fieldData, onUpdate);

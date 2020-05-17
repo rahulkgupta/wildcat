@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SubmitField getValue 1`] = `"2343"`;
+
+exports[`SubmitField toJSON 1`] = `
+Object {
+  "id": "1234",
+  "value": "2343",
+}
+`;

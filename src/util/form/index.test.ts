@@ -16,6 +16,10 @@ describe('Form', () => {
             error: 'error',
             type: 'text',
           },
+          submit: {
+            type: 'submit',
+            value: 'value',
+          },
         },
       },
       {
@@ -56,7 +60,11 @@ describe('Form', () => {
     });
 
     test('getFields', () => {
-      expect(form.getFields().length).toBe(1);
+      expect(form.getFields()).toMatchSnapshot();
+    });
+
+    test('toJSON', () => {
+      expect(form.toJSON()).toMatchSnapshot();
     });
   });
 });
