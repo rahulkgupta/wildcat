@@ -1,4 +1,5 @@
 import { google } from 'googleapis';
+import { Credentials } from 'googleapis/node_modules/google-auth-library';
 
 const oauth2Client = new google.auth.OAuth2(
   process.env.GOOGLE_CLIENT_ID,
@@ -19,7 +20,7 @@ export const AUTH_URL = oauth2Client.generateAuthUrl({
   scope: scopes,
 });
 
-export const getToken = async function (code: string) {
+export const getToken = async function (code: string): Promise<Credentials> {
   const { tokens } = await oauth2Client.getToken(code);
   return tokens;
 };
@@ -30,11 +31,15 @@ export const getToken = async function (code: string) {
 // callign the db means this isn't "pure"
 // having the caller call the db means the caller needs to know about the token
 // that's fine given that the caller needs to know the spreadsheet ID and the form info
-export const appendValues = async function (spreadSheetID: string, token: Credentials, data) {
+export const appendValues = async function (
+  spreadsheetId: string,
+  token: Credentials,
+  data: string[][],
+): Promise<void> {
   oauth2Client.setCredentials(token);
-  const result = await sheets.spreadsheets.values.append({
+  await sheets.spreadsheets.values.append({
     auth: oauth2Client,
-    spreadsheetId: '16D-xr-s-xtociQH4RcrhOGsgcHXG9m2VmenSbeM3Hw0',
+    spreadsheetId,
     range: 'A1', // better understand what this is...
     valueInputOption: 'RAW',
     requestBody: {
@@ -43,5 +48,5 @@ export const appendValues = async function (spreadSheetID: string, token: Creden
   });
 
   // TODO: convert result into something generic
-  return result;
+  return;
 };

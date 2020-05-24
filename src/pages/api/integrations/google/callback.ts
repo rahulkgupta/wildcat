@@ -1,5 +1,4 @@
-import { setAccessToken } from '@src/util/db/integrations';
-import { getToken } from '@src/util/integrations/google';
+import { NextApiRequest, NextApiResponse } from 'next';
 
 // TODO: handle errors
 export default async (req: NextApiRequest, res: NextApiResponse) => {
