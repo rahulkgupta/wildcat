@@ -1,24 +1,6 @@
-import { google } from 'googleapis';
 import { Credentials } from 'googleapis/node_modules/google-auth-library';
-
-const oauth2Client = new google.auth.OAuth2(
-  process.env.GOOGLE_CLIENT_ID,
-  process.env.GOOGLE_CLIENT_SECRET,
-  process.env.GOOGLE_REDIRECT_URL,
-);
-
-const sheets = google.sheets('v4');
-
-const scopes = ['https://www.googleapis.com/auth/drive.file'];
-
-export const AUTH_URL = oauth2Client.generateAuthUrl({
-  // 'online' (default) or 'offline' (gets refresh_token)
-  // eslint-disable-next-line @typescript-eslint/camelcase
-  access_type: 'offline',
-
-  // If you only need one scope you can pass it as a string
-  scope: scopes,
-});
+import sheets from './api';
+import oauth2Client from './auth';
 
 export const getToken = async function (code: string): Promise<Credentials> {
   const { tokens } = await oauth2Client.getToken(code);
@@ -35,7 +17,8 @@ export const appendValues = async function (
   spreadsheetId: string,
   token: Credentials,
   data: string[][],
-): Promise<void> {
+): Promise<boolean> {
+  const result = true;
   oauth2Client.setCredentials(token);
   await sheets.spreadsheets.values.append({
     auth: oauth2Client,
@@ -48,5 +31,5 @@ export const appendValues = async function (
   });
 
   // TODO: convert result into something generic
-  return;
+  return result;
 };

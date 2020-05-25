@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Google API getToken 1`] = `
+Object {
+  "key": "value",
+}
+`;
