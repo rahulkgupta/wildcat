@@ -7,12 +7,6 @@ export const getToken = async function (code: string): Promise<Credentials> {
   return tokens;
 };
 
-// does this function need to konw about the form?
-// does this function make db calls, or is the db info passed to this function?
-// eg token values?
-// callign the db means this isn't "pure"
-// having the caller call the db means the caller needs to know about the token
-// that's fine given that the caller needs to know the spreadsheet ID and the form info
 export const appendValues = async function (
   spreadsheetId: string,
   token: Credentials,
