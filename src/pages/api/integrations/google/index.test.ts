@@ -1,7 +1,7 @@
 import authReq from '.';
 import { mock } from 'jest-mock-extended';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { AUTH_URL } from '@src/util/integrations/google';
+import { AUTH_URL } from '@src/util/integrations/google/auth';
 
 describe('callback', () => {
   it('redirects', async () => {
