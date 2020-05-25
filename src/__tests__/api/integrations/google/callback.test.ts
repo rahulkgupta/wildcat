@@ -1,17 +1,14 @@
-import authReq from '.';
+import callback from '@src/pages/api/integrations/google/callback';
 import { mock } from 'jest-mock-extended';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { AUTH_URL } from '@src/util/integrations/google/auth';
 
 describe('callback', () => {
   it('redirects', async () => {
     const res = mock<NextApiResponse>();
     const req = mock<NextApiRequest>();
 
-    await authReq(req, res);
+    await callback(req, res);
 
-    expect(res.writeHead).toHaveBeenCalledWith(302, {
-      Location: AUTH_URL,
-    });
+    expect(res.writeHead).toHaveBeenCalledWith(302, { Location: '/' });
   });
 });
