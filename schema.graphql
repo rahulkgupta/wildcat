@@ -1,0 +1,11 @@
+type AccessToken {
+  access_token: String,
+  refresh_token: String,
+  expiry_date: Float,
+  token_type: String,
+  service: String,
+}
+
+type Query {
+  findAccessTokenByService(service: String): AccessToken
+}

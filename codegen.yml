@@ -1,0 +1,9 @@
+overwrite: true
+schema: "src/**/*.graphql"
+documents: "src/**/*.graphql"
+generates:
+  src/db/sdk.ts:
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-graphql-request"
