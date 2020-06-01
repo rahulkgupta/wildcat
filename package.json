@@ -10,7 +10,7 @@
     "lint": "eslint './src/**/*.{js,ts,tsx}'",
     "test": "jest --watch",
     "test:ci": "jest --ci",
-    "blah": "graphql-codegen --config codegen.yml"
+    "codegen": "graphql-codegen --config codegen.yml"
   },
   "dependencies": {
     "@types/node-fetch": "^2.5.7",
@@ -38,6 +38,7 @@
   "devDependencies": {
     "@graphql-codegen/cli": "1.15.0",
     "@graphql-codegen/introspection": "1.15.0",
+    "@graphql-codegen/near-operation-file-preset": "^1.15.0",
     "@graphql-codegen/typescript": "1.15.0",
     "@graphql-codegen/typescript-graphql-request": "^1.15.0",
     "@graphql-codegen/typescript-operations": "1.15.0",

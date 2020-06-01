@@ -1,5 +1,5 @@
 import { GraphQLClient } from 'graphql-request';
-import { getSdk } from '@src/generated/test';
+import { getSdk } from '@src/db/sdk';
 
 console.log('hello world ${process.env.FAUNADB_SECRET}');
 const graphQLClient = new GraphQLClient(process.env.GRAPHQL_ENDPOINT || '', {
