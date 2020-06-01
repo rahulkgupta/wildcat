@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { getFormByID, getNextForm } from '@src/util/db';
+import { getFormByID, getNextForm } from '@src/db/datastore';
 
 /**
  * API endpoint for `/api/forms/{id}`

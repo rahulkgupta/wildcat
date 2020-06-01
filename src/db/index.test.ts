@@ -1,4 +1,4 @@
-import { getFormByID, getNextForm } from '.';
+import { getFormByID, getNextForm } from './datastore';
 
 describe('db', () => {
   describe('getFormByID', () => {

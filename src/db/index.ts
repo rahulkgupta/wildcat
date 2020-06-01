@@ -1,80 +1,12 @@
-interface Field {
-  label?: string;
-  value?: string;
-  error?: string;
-  type?: string;
-}
+import { GraphQLClient } from 'graphql-request';
+import { getSdk } from '@src/db/sdk';
 
-interface Form {
-  id: string;
-  fields: {
-    [fieldID: string]: Field;
-  };
-  next?: {
-    type: number;
-    id: string;
-  };
-}
-
-interface Data {
-  [id: string]: Form;
-}
-const data: Data = {
-  '1234': {
-    id: '1234',
-    fields: {
-      ssaf: {
-        label: 'label',
-        value: 'value',
-        error: 'error',
-        type: 'text',
-      },
-      aasas: {
-        label: 'label',
-        value: 'value',
-        type: 'submit',
-      },
-    },
-    next: {
-      type: 0,
-      id: '2345',
-    },
+const graphQLClient = new GraphQLClient(process.env.GRAPHQL_ENDPOINT || '', {
+  headers: {
+    authorization: `Bearer ${process.env.FAUNADB_SECRET}`,
   },
-  '2345': {
-    id: '2345',
-    fields: {
-      ssaf: {
-        label: 'Thank You',
-        value: 'value',
-        error: 'error',
-        type: 'text',
-      },
-    },
-  },
-};
+});
 
-/**
- * if no {@link Form} exists, returns null
- * @param id {@link Form} id
- */
-export function getFormByID(id: string): Form | null {
-  const response = data[id];
-  return response ? response : null;
-}
+const sdk = getSdk(graphQLClient);
 
-/**
- * returns a {@link Form} based on the previous form ID
- * returns null if the {@link Form} is null or has no next
- * @param prevFormId previous {@link Form} ID
- */
-export function getNextForm(prevFormId: string): Form | null {
-  const form = getFormByID(prevFormId);
-  if (!form) {
-    return null;
-  }
-  const next = form.next;
-  if (!next) {
-    return null;
-  }
-  return getFormByID(next['id']);
-}
+export default sdk;
