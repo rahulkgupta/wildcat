@@ -1,17 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getFormByID, getNextForm } from '@src/db/datastore';
-import { google } from 'googleapis';
 import { appendValues } from '@src/util/integrations/google';
 import client from '@src/db';
-import { Credentials } from 'googleapis/node_modules/google-auth-library';
-
-const oauth2Client = new google.auth.OAuth2(
-  process.env.GOOGLE_CLIENT_ID,
-  process.env.GOOGLE_CLIENT_SECRET,
-  process.env.GOOGLE_REDIRECT_URL,
-);
-
-const sheets = google.sheets('v4');
 
 /**
  * API endpoint for `/api/forms/{id}`
