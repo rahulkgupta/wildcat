@@ -60,7 +60,6 @@ const data: Data = {
  * @param id {@link Form} id
  */
 export function getFormByID(id: string): Form | null {
-  console.log(id);
   const response = data[id];
   return response ? response : null;
 }

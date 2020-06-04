@@ -9,10 +9,4 @@ const resolvers: Resolvers = {
   },
 };
 
-export const formQuery: QueryResolvers = {
-  form: (parent, args, context, info) => {
-    return getFormByID(args.id);
-  },
-};
-
-export default formQuery.form;
+export default resolvers;
