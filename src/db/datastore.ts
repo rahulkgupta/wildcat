@@ -3,13 +3,12 @@ interface Field {
   value?: string;
   error?: string;
   type?: string;
+  id: string;
 }
 
 interface Form {
   id: string;
-  fields: {
-    [fieldID: string]: Field;
-  };
+  fields: Field[];
   next?: {
     type: number;
     id: string;
@@ -22,19 +21,21 @@ interface Data {
 const data: Data = {
   '1234': {
     id: '1234',
-    fields: {
-      ssaf: {
+    fields: [
+      {
         label: 'label',
         value: 'value',
         error: 'error',
         type: 'text',
+        id: 'ssaf',
       },
-      aasas: {
+      {
         label: 'label',
         value: 'value',
         type: 'submit',
+        id: 'aasas',
       },
-    },
+    ],
     next: {
       type: 0,
       id: '2345',
@@ -42,14 +43,15 @@ const data: Data = {
   },
   '2345': {
     id: '2345',
-    fields: {
-      ssaf: {
+    fields: [
+      {
         label: 'Thank You',
+        id: 'ssaf',
         value: 'value',
         error: 'error',
         type: 'text',
       },
-    },
+    ],
   },
 };
 
@@ -58,6 +60,7 @@ const data: Data = {
  * @param id {@link Form} id
  */
 export function getFormByID(id: string): Form | null {
+  console.log(id);
   const response = data[id];
   return response ? response : null;
 }
