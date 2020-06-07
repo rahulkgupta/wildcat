@@ -1,11 +1,9 @@
-import { getFormByID } from '@src/db/datastore';
-import { Resolvers, QueryResolvers } from '@src/graphql/sdk';
+import { Resolvers } from '@src/graphql/sdk';
+import form from './query/form';
 
 const resolvers: Resolvers = {
   Query: {
-    form: (parent, args, context, info) => {
-      return getFormByID(args.id);
-    },
+    form: form,
   },
 };
 
