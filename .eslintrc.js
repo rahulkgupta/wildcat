@@ -18,5 +18,5 @@ module.exports = {
     "@typescript-eslint/camelcase": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".tsx", ".jsx"] }],
   },
-  ignorePatterns: ["src/db/sdk.ts"]
+  ignorePatterns: ["src/db/sdk.ts", "src/graphql/sdk.ts"]
 };
