@@ -2,19 +2,21 @@
 
 exports[`db getFormByID finds a form 1`] = `
 Object {
-  "fields": Object {
-    "aasas": Object {
-      "label": "label",
-      "type": "submit",
-      "value": "value",
-    },
-    "ssaf": Object {
+  "fields": Array [
+    Object {
       "error": "error",
+      "id": "ssaf",
       "label": "label",
       "type": "text",
       "value": "value",
     },
-  },
+    Object {
+      "id": "aasas",
+      "label": "label",
+      "type": "submit",
+      "value": "value",
+    },
+  ],
   "id": "1234",
   "next": Object {
     "id": "2345",
@@ -25,14 +27,15 @@ Object {
 
 exports[`db getNextForm gets the next form 1`] = `
 Object {
-  "fields": Object {
-    "ssaf": Object {
+  "fields": Array [
+    Object {
       "error": "error",
+      "id": "ssaf",
       "label": "Thank You",
       "type": "text",
       "value": "value",
     },
-  },
+  ],
   "id": "2345",
 }
 `;

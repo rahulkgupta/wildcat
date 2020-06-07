@@ -1,9 +1,10 @@
 overwrite: true
-schema: "src/**/*.graphql"
-documents: "src/**/*.graphql"
+schema: http://localhost:3000/api/graphql
 generates:
-  src/db/sdk.ts:
+  src/graphql/sdk.ts:
     plugins:
       - "typescript"
-      - "typescript-operations"
-      - "typescript-graphql-request"
+      - "typescript-resolvers"
+    config:
+      useIndexSignature: true
+
