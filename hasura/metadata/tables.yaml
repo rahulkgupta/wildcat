@@ -1,0 +1,6 @@
+- table:
+    schema: public
+    name: forms
+- table:
+    schema: public
+    name: integrations
