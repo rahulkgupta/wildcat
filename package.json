@@ -57,6 +57,7 @@
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-react-hooks": "^2.5.0",
+    "hasura-cli": "^1.2.2",
     "jest-mock-extended": "^1.0.8",
     "react-test-renderer": "^16.13.1",
     "typedoc": "^0.17.6",
