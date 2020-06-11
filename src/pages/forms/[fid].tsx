@@ -44,27 +44,7 @@ class FormView extends React.Component<Props, State> {
   }
 
   async submit() {
-    const res = await fetch(`/api/forms/${this.state.form?.getId()}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(this.state.form?.toJSON()),
-    });
-    if (!res.ok) {
-      return {
-        props: {
-          ok: false,
-        },
-      };
-    }
-    const json = await res.json();
-
-    this.setState({
-      form: new Form(json, {
-        onUpdate: this.forceUpdate.bind(this),
-      }),
-    });
+    console.log('this is a submit placeholder');
   }
   /**
    * iterates through all the fields in the form and renders them using {@link FieldView}
