@@ -11,7 +11,7 @@ module.exports = {
   transform: {
     '^.+\\.(ts|tsx)$': 'babel-jest',
   },
-  collectCoverageFrom: ['./src/**/*.{ts,tsx}', '!./src/db/(sdk|index).ts'],
+  collectCoverageFrom: ['./src/**/*.{ts,tsx}'],
   collectCoverage: true,
   coverageThreshold: {
     global: {},
