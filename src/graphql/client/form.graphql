@@ -1,5 +1,0 @@
-query getForm($id: uuid!) {
-  forms(where: {id: {_eq: $id}}) {
-    data
-  }
-}

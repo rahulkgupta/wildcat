@@ -1,12 +1,10 @@
 overwrite: true
-schema: https://tilden-io-dev.herokuapp.com/v1/graphql
-documents: ['./src/graphql/**/*.graphql']
+schema: http://localhost:3000/api/graphql
 generates:
-  src/graphql/schema.ts:
+  src/graphql/sdk.ts:
     plugins:
       - "typescript"
-      - 'typescript-operations'
-      - "typescript-graphql-request"
+      - "typescript-resolvers"
     config:
       useIndexSignature: true
 
