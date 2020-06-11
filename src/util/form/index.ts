@@ -51,7 +51,6 @@ export default class Form {
     this.fields = [];
     this.onUpdate = hooks.onUpdate;
     for (const field in data.data.fields) {
-      console.log(field);
       this.fields.push(this.factory.createField(field, data.data.fields[field], this.update.bind(this)));
     }
   }

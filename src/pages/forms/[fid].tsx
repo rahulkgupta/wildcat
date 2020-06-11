@@ -6,16 +6,19 @@ import React from 'react';
 import Form from '@src/util/form';
 
 import FieldView from '@src/components/fields';
-import fetcher, { getQuery } from '@src/graphql/client/form';
+import getQuery from '@src/graphql/client/form';
+import fetcher from '@src/graphql/client/fetcher';
 
 interface State {
   form?: Form;
   ok: boolean;
 }
 
+interface Data {
+  forms_by_pk: any;
+}
 interface Props {
-  form?: Form;
-  ok: boolean;
+  data: Data;
 }
 
 /**
@@ -30,7 +33,6 @@ class FormView extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     const ok = true;
-    console.log(props);
     if (ok) {
       const form = new Form(this.props.data.forms_by_pk, {
         onUpdate: this.forceUpdate.bind(this),
@@ -93,24 +95,6 @@ export default FormView;
  * @param context contains the form id which is grabbed from the url (ie `tilden.io/forms/{id}`)
  */
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  // const { origin } = absoluteUrl(context.req);
-  // const res = await fetch(`${origin}/api/forms/${context.params?.fid}`);
-  // if (!res.ok) {
-  //   return {
-  //     props: {
-  //       ok: false,
-  //     },
-  //   };
-  // }
-  // const json = await res.json();
-  // return {
-  //   props: {
-  //     form: json,
-  //     ok: true,
-  //   },
-  // };
-
   const data = await fetcher(getQuery(`${context.params?.fid}`));
-  console.log(data);
   return { props: { data } };
 };
