@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`addIntegration works 1`] = `
+"mutation MyMutation($data: jsonb = [object Object], $service: String = \\"service\\") {
+    insert_integrations_one(object: {data: $data, service: $service}) {
+      data
+    }
+  }
+  "
+`;
