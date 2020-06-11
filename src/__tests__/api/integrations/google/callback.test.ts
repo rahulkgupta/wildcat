@@ -25,10 +25,7 @@ describe('callback', () => {
 
     await callback(req, res);
     expect(oauth2Client.getToken).toHaveBeenCalledWith('code');
-    expect(fetcher).toHaveBeenCalledWith(addIntegration(), {
-      data: tokens,
-      service: 'google',
-    });
+    expect(fetcher).toHaveBeenCalledWith(addIntegration(tokens, 'google'));
     expect(res.writeHead).toHaveBeenCalledWith(302, { Location: '/' });
   });
 });

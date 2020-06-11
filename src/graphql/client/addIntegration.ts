@@ -1,6 +1,5 @@
-// will need to figure out how to handle SWR here...
-const addIntegrationMutation = (): string => {
-  return `mutation MyMutation($data: jsonb, $service: String = "") {
+const addIntegrationMutation = (data: any, service: string): string => {
+  return `mutation MyMutation($data: jsonb = ${data}, $service: String = "${service}") {
     insert_integrations_one(object: {data: $data, service: $service}) {
       data
     }
