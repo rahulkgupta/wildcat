@@ -14,11 +14,6 @@ module.exports = {
   collectCoverageFrom: ['./src/**/*.{ts,tsx}', '!./src/db/(sdk|index).ts'],
   collectCoverage: true,
   coverageThreshold: {
-    global: {
-      branches: 48,
-      functions: 81,
-      lines: 62,
-      statements: 63,
-    },
+    global: {},
   },
 };
