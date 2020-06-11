@@ -23,8 +23,8 @@ npm run test
 ## Stack
 - Next.js: SSR, server, and API
 - React: Rendering Engine
-- Graphql: API layer (Using graphql-code-generator and Apollo)
-- FaunaDB: DB layer
+- Hasura: API and Graphql layer
+- postgres: DB layer
 - Jest: Testing
 
 ## CI / CD

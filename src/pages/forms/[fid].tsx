@@ -1,6 +1,4 @@
 import { GetServerSideProps } from 'next';
-import fetch from 'node-fetch';
-import absoluteUrl from 'next-absolute-url';
 
 import React from 'react';
 import Form from '@src/util/form';
