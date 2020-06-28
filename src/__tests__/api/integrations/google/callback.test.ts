@@ -4,9 +4,11 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import oauth2Client from '@src/util/integrations/google/auth';
 import fetcher from '@src/graphql/client/fetcher';
 import addIntegration from '@src/graphql/client/addIntegration';
+import auth0 from '@src/util/auth0';
 
 jest.mock('@src/util/integrations/google/auth');
 jest.mock('@src/graphql/client/fetcher');
+jest.mock('@src/util/auth0');
 
 describe('callback', () => {
   it('redirects', async () => {
@@ -23,9 +25,17 @@ describe('callback', () => {
       tokens,
     });
 
+    const getAccessToken = jest.fn();
+    auth0.tokenCache.mockReturnValueOnce({
+      getAccessToken,
+    });
+
+    getAccessToken.mockReturnValueOnce({
+      accessToken: 'accessToken',
+    });
     await callback(req, res);
     expect(oauth2Client.getToken).toHaveBeenCalledWith('code');
-    expect(fetcher).toHaveBeenCalledWith(addIntegration(tokens, 'google'));
+    expect(fetcher).toHaveBeenCalledWith(addIntegration(tokens, 'google'), 'accessToken');
     expect(res.writeHead).toHaveBeenCalledWith(302, { Location: '/' });
   });
 });
