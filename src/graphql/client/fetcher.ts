@@ -1,7 +1,12 @@
 import { GraphQLClient } from 'graphql-request';
 
-export const graphQLClient = new GraphQLClient(`${process.env.HASURA_GRAPHQL_HTTP_ENDPOINT}`, {
+const graphQLClient = new GraphQLClient(`${process.env.HASURA_GRAPHQL_HTTP_ENDPOINT}`, {
   headers: {},
 });
 
-export default (query: string) => graphQLClient.request(query);
+export default (query: string, accessToken?: string): Promise<any> => {
+  if (accessToken) {
+    graphQLClient.setHeader('Authorization', `Bearer ${accessToken}`);
+  }
+  return graphQLClient.request(query);
+};
