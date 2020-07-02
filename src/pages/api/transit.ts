@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import axios, { AxiosResponse } from 'axios';
+import { transit_realtime } from 'gtfs-realtime-bindings';
 
 const TOKENS = [
   'd18dbf6c-b4cc-40dc-a0c7-aeb29bd25bc1',
@@ -19,29 +20,89 @@ function getRandomInt(max: number) {
   return Math.floor(Math.random() * Math.floor(max));
 }
 
-let cache: AxiosResponse<any>;
+const cache = [];
+let bartCache: AxiosResponse<any>;
 let lastFetch = Date.now();
+
+const AGENCIES = [
+  '3D',
+  'AC',
+  'AM',
+  'BA',
+  'CC',
+  'CE',
+  'CM',
+  'CT',
+  'DE',
+  'EM',
+  'FS',
+  'GF',
+  'GG',
+  'MA',
+  'PE',
+  'RG',
+  'RV',
+  'SA',
+  'SB',
+  'SC',
+  'SF',
+  'SI',
+  'SM',
+  'SO',
+  'SR',
+  'SS',
+  'ST',
+  'TD',
+  'UC',
+  'VC',
+  'VN',
+  'WC',
+  'WH',
+];
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   res.statusCode = 200;
-  const token = TOKENS[getRandomInt(TOKENS.length)];
   const currentTime = Date.now();
   const diff = Math.floor((currentTime - lastFetch) / 1000);
-  if (diff > 10 || cache == undefined) {
-    cache = await axios.get(`http://api.511.org/transit/VehicleMonitoring?api_key=${token}&agency=AC`);
+  if (diff > 10) {
+    const requests = [];
+    AGENCIES.map((agency) => {
+      requests.push(
+        axios({
+          method: 'get',
+          url: `http://api.511.org/transit/vehiclepositions?api_key=${
+            TOKENS[getRandomInt(TOKENS.length)]
+          }&agency=${agency}`,
+          responseType: 'arraybuffer',
+        }),
+      );
+    });
+    const results = await Promise.all(requests);
+    for (const line in results) {
+      cache[line] = results[line];
+    }
     lastFetch = currentTime;
   }
-  const blah = JSON.parse(cache.data.substring(1));
-  const vehicles = blah.Siri.ServiceDelivery.VehicleMonitoringDelivery.VehicleActivity;
   const response = [];
-  for (const i in vehicles) {
-    response.push({
-      coordinates: [
-        parseFloat(vehicles[i].MonitoredVehicleJourney.VehicleLocation.Longitude),
-        parseFloat(vehicles[i].MonitoredVehicleJourney.VehicleLocation.Latitude),
-      ],
+
+  for (const line in cache) {
+    const test = transit_realtime.FeedMessage.decode(cache[line].data);
+    test.entity.forEach(function (entity) {
+      response.push({
+        coordinates: [entity.vehicle.position.longitude, entity.vehicle.position.latitude],
+      });
     });
   }
+  // const blah = JSON.parse(cache.data.substring(1));
+  // const vehicles = blah.Siri.ServiceDelivery.VehicleMonitoringDelivery.VehicleActivity;
+  // for (const i in vehicles) {
+  //   response.push({
+  //     coordinates: [
+  //       parseFloat(vehicles[i].MonitoredVehicleJourney.VehicleLocation.Longitude),
+  //       parseFloat(vehicles[i].MonitoredVehicleJourney.VehicleLocation.Latitude),
+  //     ],
+  //   });
+  // }
   res.setHeader('Content-Type', 'application/json');
   res.end(JSON.stringify(response));
 };
