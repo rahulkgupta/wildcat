@@ -14,9 +14,12 @@
   },
   "dependencies": {
     "@auth0/nextjs-auth0": "^0.13.0",
+    "@danmarshall/deckgl-typings": "^4.1.11",
     "@types/node-fetch": "^2.5.7",
     "@typescript-eslint/eslint-plugin": "^2.31.0",
     "babel-jest": "^26.0.1",
+    "d3-color": "^1.4.1",
+    "deck.gl": "^8.2.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.3",
     "google-spreadsheet": "^3.0.11",
@@ -34,6 +37,7 @@
     "prettier": "^2.0.5",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
+    "react-map-gl": "^5.2.7",
     "swr": "^0.2.2"
   },
   "devDependencies": {
