@@ -1,6 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import axios, { AxiosResponse } from 'axios';
-import { transit_realtime } from 'gtfs-realtime-bindings';
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const GtfsRealtimeBindings = require('gtfs-realtime-bindings');
 
 const TOKENS = [
   'd18dbf6c-b4cc-40dc-a0c7-aeb29bd25bc1',
@@ -20,9 +22,8 @@ function getRandomInt(max: number) {
   return Math.floor(Math.random() * Math.floor(max));
 }
 
-const cache = [];
-let bartCache: AxiosResponse<any>;
-let lastFetch = Date.now();
+const cache: AxiosResponse<any>[] = [];
+let lastFetch: number;
 
 const AGENCIES = [
   '3D',
@@ -63,9 +64,8 @@ const AGENCIES = [
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   res.statusCode = 200;
   const currentTime = Date.now();
-  const diff = Math.floor((currentTime - lastFetch) / 1000);
-  if (diff > 10) {
-    const requests = [];
+  if (lastFetch == undefined || Math.floor((currentTime - lastFetch) / 1000) > 10) {
+    const requests: Promise<any>[] = [];
     AGENCIES.map((agency) => {
       requests.push(
         axios({
@@ -83,11 +83,11 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     }
     lastFetch = currentTime;
   }
-  const response = [];
+  const response: any = [];
 
   for (const line in cache) {
-    const test = transit_realtime.FeedMessage.decode(cache[line].data);
-    test.entity.forEach(function (entity) {
+    const test = GtfsRealtimeBindings.transit_realtime.FeedMessage.decode(cache[line].data);
+    test.entity.forEach(function (entity: any) {
       response.push({
         coordinates: [entity.vehicle.position.longitude, entity.vehicle.position.latitude],
       });
