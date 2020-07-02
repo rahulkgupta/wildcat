@@ -1,7 +1,7 @@
 import DeckGL from 'deck.gl';
 import React, { useState } from 'react';
 
-import { PathLayer, ScatterplotLayer } from 'deck.gl';
+import { PathLayer, ScatterplotLayer, GeoJsonLayer } from 'deck.gl';
 import { StaticMap } from 'react-map-gl';
 import { rgb } from 'd3-color';
 import useSWR from 'swr';
@@ -17,7 +17,7 @@ const INITIAL_VIEW_STATE = {
   longitude: -122.30669,
   latitude: 37.7853,
   zoom: 12,
-  pitch: 60,
+  pitch: 40,
   bearing: 0,
 };
 
@@ -54,6 +54,19 @@ const TransitView = () => {
   if (error) return <div>failed to load</div>;
   if (!data) return <div>loading...</div>;
 
+  // const geojsonLayer = new GeoJsonLayer({
+  //   data: '/zip_codes.geojson',
+  //   opacity: 0.8,
+  //   stroked: false,
+  //   filled: false,
+  //   extruded: true,
+  //   wireframe: true,
+
+  //   getElevation: (f) => 10,
+  //   getLineColor: [0, 255, 255],
+  //   pickable: true,
+  // });
+
   const scatterplot = new ScatterplotLayer({
     id: 'scatterplot-layer',
     data: data,
@@ -76,7 +89,7 @@ const TransitView = () => {
   });
 
   return (
-    <DeckGL initialViewState={INITIAL_VIEW_STATE} controller={true} layers={[scatterplot, layer]}>
+    <DeckGL initialViewState={INITIAL_VIEW_STATE} controller={true} layers={[scatterplot, layer, geojsonLayer]}>
       <StaticMap mapboxApiAccessToken={MAPBOX_ACCESS_TOKEN} />
     </DeckGL>
   );
