@@ -89,7 +89,7 @@ const TransitView = () => {
   });
 
   return (
-    <DeckGL initialViewState={INITIAL_VIEW_STATE} controller={true} layers={[scatterplot, layer, geojsonLayer]}>
+    <DeckGL initialViewState={INITIAL_VIEW_STATE} controller={true} layers={[scatterplot, layer]}>
       <StaticMap mapboxApiAccessToken={MAPBOX_ACCESS_TOKEN} />
     </DeckGL>
   );
