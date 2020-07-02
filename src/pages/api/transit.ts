@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 
 const TOKENS = [
   'd18dbf6c-b4cc-40dc-a0c7-aeb29bd25bc1',
@@ -19,7 +19,7 @@ function getRandomInt(max: number) {
   return Math.floor(Math.random() * Math.floor(max));
 }
 
-let cache;
+let cache: AxiosResponse<any>;
 let lastFetch = Date.now();
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
@@ -28,7 +28,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   const currentTime = Date.now();
   const diff = Math.floor((currentTime - lastFetch) / 1000);
   if (diff > 10 || cache == undefined) {
-    console.log('fetching');
     cache = await axios.get(`http://api.511.org/transit/VehicleMonitoring?api_key=${token}&agency=AC`);
     lastFetch = currentTime;
   }

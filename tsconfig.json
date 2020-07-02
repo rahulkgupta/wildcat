@@ -28,7 +28,7 @@
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx", "src/graphql/client/form.graphl"
+    "**/*.tsx", "src/graphql/client/form.graphl", "src/pages/transit.jsx"
   ]
 }
 
