@@ -26,6 +26,7 @@
     "googleapis": "^51.0.0",
     "graphql": "^15.0.0",
     "graphql-request": "^2.0.0",
+    "gtfs-realtime-bindings": "0.0.5",
     "identity-obj-proxy": "^3.0.0",
     "install": "^0.13.0",
     "jest": "^26.0.1",
