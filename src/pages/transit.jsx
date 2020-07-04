@@ -1,13 +1,12 @@
 import DeckGL from 'deck.gl';
 import React, { useState } from 'react';
 
-import { PathLayer, ScatterplotLayer, GeoJsonLayer } from 'deck.gl';
+import { ScatterplotLayer, PathLayer } from 'deck.gl';
 import { StaticMap } from 'react-map-gl';
 import { rgb } from 'd3-color';
 import useSWR from 'swr';
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
-
 // Set your mapbox access token here
 const MAPBOX_ACCESS_TOKEN =
   'pk.eyJ1IjoicmFodWxrZ3VwdGEiLCJhIjoiY2lmZnQ5c24yOHd2cXJzbTd5d3E1MWZsMiJ9.4LRii51YrsWrPkIJstIE0A';
@@ -36,36 +35,68 @@ setInterval(() => {
   switcher = !switcher;
 }, 1000);
 
-// Data to be used by the LineLayer
+const initialTimeStamp = Date.now();
+function getData(results, initialTimeStamp) {
+  const { data, error } = useSWR('/api/transit', fetcher, { refreshInterval: 1100 });
+  // data input format
+  // {id: {coordinates: []}}
+  for (const num in results) {
+    const id = results[num].id;
+    if (!data[id]) {
+      console.log(results[num]);
+    } else {
+      const path = results[num].path;
+      const lastCoordinates = path[path.length - 1];
+      if (lastCoordinates[0] != data[id].coordinates[0] || lastCoordinates[1] != data[id].coordinates[1]) {
+        results[num].path.push(data[id].coordinates);
+        results[num].timestamps.push(Date.now() - initialTimeStamp);
+      }
+    }
+  }
+  if (results.length == 0) {
+    for (const id in data) {
+      results.push({
+        id: id,
+        path: [data[id].coordinates],
+        timestamps: [0],
+      });
+    }
+  }
+  // setResults(results);
+  // final trip layer
+  // [ { path: [], timestamps: [], id:...}, ...]
 
+  return {
+    data: data,
+    isLoading: !error && !data,
+    isError: error,
+  };
+}
+
+const results = [];
 const TransitView = () => {
+  const { data, error } = getData(results, initialTimeStamp);
+  if (error) return <div>failed to load</div>;
+  if (!data) return <div>loading...</div>;
+  data[Symbol.iterator] = function* () {
+    for (const key in this) {
+      yield this[key]; // yield [key, value] pair
+    }
+  };
+
   const layer = new PathLayer({
     id: 'path-layer',
-    data: '/bart-lines.json',
+    data: results,
     pickable: true,
     widthScale: 20,
     widthMinPixels: 2,
-    getPath: (d) => d.path,
-    getWidth: (d) => 5,
-    getColor: (d) => colorToRGBArray(d.color),
+    getPath: (d) => {
+      return d.path;
+    },
+    dataComparator: (newData, oldData) => {
+      return false;
+    },
   });
-
-  const { data, error } = useSWR('/api/transit', fetcher, { refreshInterval: 1100 });
-  if (error) return <div>failed to load</div>;
-  if (!data) return <div>loading...</div>;
-
-  // const geojsonLayer = new GeoJsonLayer({
-  //   data: '/zip_codes.geojson',
-  //   opacity: 0.8,
-  //   stroked: false,
-  //   filled: false,
-  //   extruded: true,
-  //   wireframe: true,
-
-  //   getElevation: (f) => 10,
-  //   getLineColor: [0, 255, 255],
-  //   pickable: true,
-  // });
 
   const scatterplot = new ScatterplotLayer({
     id: 'scatterplot-layer',
@@ -89,7 +120,7 @@ const TransitView = () => {
   });
 
   return (
-    <DeckGL initialViewState={INITIAL_VIEW_STATE} controller={true} layers={[scatterplot]}>
+    <DeckGL initialViewState={INITIAL_VIEW_STATE} controller={true} layers={[layer, scatterplot]}>
       <StaticMap mapboxApiAccessToken={MAPBOX_ACCESS_TOKEN} />
     </DeckGL>
   );
