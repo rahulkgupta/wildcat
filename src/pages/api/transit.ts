@@ -26,7 +26,7 @@ function getRandomInt(max: number) {
   return Math.floor(Math.random() * Math.floor(max));
 }
 
-const cache: AxiosResponse<any>[] = [];
+const cache: any = {};
 let lastFetch: number;
 
 const AGENCIES = [
@@ -83,30 +83,27 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     });
     const results = await Promise.all(requests);
     for (const line in results) {
-      cache[line] = results[line];
+      cache[results[line].config.url.slice(-2)] = results[line];
     }
     lastFetch = currentTime;
   }
-  const response: any = [];
+  const response: any = {};
 
-  for (const line in cache) {
-    const test = GtfsRealtimeBindings.transit_realtime.FeedMessage.decode(cache[line].data);
-    test.entity.forEach(function (entity: any) {
-      response.push({
+  for (const system in cache) {
+    const entities = GtfsRealtimeBindings.transit_realtime.FeedMessage.decode(cache[system].data);
+    entities.entity.forEach(function (entity: any) {
+      const id = `${system}.${entity.id}.${entity.vehicle.vehicle.id}`;
+      if (response[id] != undefined) {
+        console.log('already found');
+        console.log(response[id]);
+        console.log(entity);
+      }
+      response[id] = {
+        system,
         coordinates: [entity.vehicle.position.longitude, entity.vehicle.position.latitude],
-      });
+      };
     });
   }
-  // const blah = JSON.parse(cache.data.substring(1));
-  // const vehicles = blah.Siri.ServiceDelivery.VehicleMonitoringDelivery.VehicleActivity;
-  // for (const i in vehicles) {
-  //   response.push({
-  //     coordinates: [
-  //       parseFloat(vehicles[i].MonitoredVehicleJourney.VehicleLocation.Longitude),
-  //       parseFloat(vehicles[i].MonitoredVehicleJourney.VehicleLocation.Latitude),
-  //     ],
-  //   });
-  // }
   res.setHeader('Content-Type', 'application/json');
   res.end(JSON.stringify(response));
 };
